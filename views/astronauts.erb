@@ -65,14 +65,16 @@
     <h3>Add Astronaut</h3>
     <div>
       <form method="POST" action="/astronauts_add">
-        <legend>Add Astronaut</legend>
-        <label for="POST-first-name">First Name: </label>
-        <input id="POST-first-name" type="text" name="fname" placeholder="First Name">
-        <label for="POST-last-name">Last Name: </label>
-        <input id="POST-last-name" type="text" name="lname" placeholder="Last Name">
-        <label for="POST-img-src">Image URL: </label>
-        <input id="POST-img-src" type="text" name="imgsrc" placeholder="Image URL">
-        <button type="submit" formmethod="POST" formaction="/astronauts_add">Add</button>
+        <fieldset>
+          <legend><span>Add Astronaut</span></legend>
+          <label for="POST-first-name">First Name: </label>
+          <input id="POST-first-name" type="text" name="fname" placeholder="First Name">
+          <label for="POST-last-name">Last Name: </label>
+          <input id="POST-last-name" type="text" name="lname" placeholder="Last Name">
+          <label for="POST-img-src">Image URL: </label>
+          <input id="POST-img-src" type="text" name="imgsrc" placeholder="Image URL">
+          <button type="submit" formmethod="POST" formaction="/astronauts_add">Add</button>
+        </fieldset>
       </form>
     </div>
 
