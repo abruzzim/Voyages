@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!-- SGML
+ Filename: views/astronauts.erb
+ Directory: /Users/abruzzim/Documents/ga_wdi/projects/planets
+ Author: Mario Abruzzi
+ Date: Thu Dec 26 16:23:41 EST 2013
+ Desc: Week 0 - Day 0 - HW
+ Notes: 
+-->
+
+<html>
+
+  <head>
+  </head>
+
+  <body>
+
+    <p>%DEBUG-I-ASTRONAUTS_RB, In views/astronauts.erb</p><br />
+    <h2>Astronauts Admin</h2><br />
+
+    <!-- Create a Table that displays all Astronauts -->
+    <h3>Table Listing</h3>
+    <table class="format">
+      <!-- Table Header -->
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <!-- Table Body -->
+      <tbody>
+        <% @astronaut_list.each do |astronaut| %>
+        <tr>
+          <!-- Column 1 -->
+          <td>
+            <a href=""><%= astronaut.fname %> <%= astronaut.lname %></a>
+          </td>
+          <!-- Column 2 -->
+          <td>
+            <a href="">
+              <img src="<%= astronaut.imgsrc %>" width="100" alt="<%= astronaut.lname %>" />
+            </a>
+          </td>
+          <!-- Column 3 -->
+          <td>
+            <form method="POST" action="/astronauts_edit">
+              <button type="submit" name="astronaut_id" value="<%= astronaut.id %>">Edit</button>
+            </form>
+          </td>
+          <!-- Column 4 -->
+          <td>
+            <form method="POST" action="/astronauts_del">
+              <button type="submit" name="astronaut_id" value="<%= astronaut.id %>">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <!-- Create add astronaut option -->
+    <h3>Add Astronaut</h3>
+    <div>
+      <form method="POST" action="/astronauts_add">
+        <legend>Add Astronaut</legend>
+        <label for="POST-first-name">First Name: </label>
+        <input id="POST-first-name" type="text" name="fname" placeholder="First Name">
+        <label for="POST-last-name">Last Name: </label>
+        <input id="POST-last-name" type="text" name="lname" placeholder="Last Name">
+        <label for="POST-img-src">Image URL: </label>
+        <input id="POST-img-src" type="text" name="imgsrc" placeholder="Image URL">
+        <button type="submit" formmethod="POST" formaction="/astronauts_add">Add</button>
+      </form>
+    </div>
+
+    <!-- Create an Unordered List of all astronauts with Buttons 
+    <h3>List with Buttons</h3>
+    <ul class="format">
+      <% @astronaut_list.each do |astronaut| %>
+      <li>
+        <%= astronaut.fname %>
+        <%= astronaut.lname %>
+        <form method="POST" action="/astronauts_del">
+          <button type="submit" name="astronaut_id" value="<%= astronaut.id %>">Delete</button>
+        </form>
+      </li>
+      <% end %>
+    </ul>
+    -->
+
+    <!-- Create a Dropdown List of all astronauts -->
+    <h3>Dropdown List</h3>
+    <select>
+      <% @astronaut_list.each do |astronaut| %>
+      <option value="<%= astronaut.id %>"><%= astronaut.fname %> <%= astronaut.lname %></option>
+      <% end %>
+    </select>
+
+  </body>
+
+</html>
+

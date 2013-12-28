@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!-- SGML
+ Filename: views/index.erb
+ Directory: /Users/abruzzim/Documents/ga_wdi/projects/planets
+ Author: Mario Abruzzi
+ Date: Thu Dec 26 16:23:41 EST 2013
+ Desc: Week 0 - Day 0 - HW
+ Notes: 
+-->
+
+<html>
+
+  <head>
+  </head>
+
+  <body>
+
+    <p>%DEBUG-I-INDEX_RB, In views/index.erb</p><br />
+
+    <!-- Display all voyages. -->
+    <div>
+    <table class="format">
+      <!-- Table Head -->
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Astronaut</th>
+          <th>Planet</th>
+          <th>Moon</th>
+        </tr>
+      </thead>
+      <!-- Table Body -->
+      <tbody>
+        <% for i in 0...@voyage_list.size %>
+          <tr>
+            <!-- Column 1 -->
+            <td>
+              <%= @voyage_list[i][:vid] %>
+            </td>
+            <!-- Column 2 -->
+            <td>
+              <%= @voyage_list[i][:name] %>
+            </td>
+            <!-- Column 3 -->
+            <td>
+              <%= @voyage_list[i][:planet] %>
+            </td>
+            <!-- Column 4 -->
+            <td>
+              <%= @voyage_list[i][:moon] %>
+            </td>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- Create new voyages. -->
+
+
+<!--
+-->
+
+  </body>
+
+</html>

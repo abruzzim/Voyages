@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- SGML
+ Filename: views/planets.erb
+ Directory: /Users/abruzzim/Documents/ga_wdi/projects/planets
+ Author: Mario Abruzzi
+ Date: Thu Dec 26 16:23:41 EST 2013
+ Desc: Week 0 - Day 0 - HW
+ Notes: 
+-->
+
+<html>
+
+  <head>
+  </head>
+
+  <body>
+
+    <p>%DEBUG-I-PLANETS_RB, In views/planets.erb</p><br />
+    <h2>Planets Admin</h2><br />
+
+    <!-- Create a Table that displays all planets -->
+    <h3>Table Listing</h3>
+    <table class="format">
+      <!-- Table Header -->
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <!-- Table Body -->
+      <tbody>
+        <% @planet_list.each do |planet| %>
+        <tr>
+          <!-- Column 1 -->
+          <td>
+            <a href=""><%= planet.name %></a>
+          </td>
+          <!-- Column 2 -->
+          <td>
+            <form method="GET" action="/planets_edit">
+              <button type="submit" name="planet_id" value="<%= planet.id %>">Edit</button>
+            </form>
+          </td>
+          <!-- Column 3 -->
+          <td>
+            <form method="POST" action="/planets_del">
+              <button type="submit" name="planet_id" value="<%= planet.id %>">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <!-- Create add planet option -->
+    <h3>Add Planet</h3>
+    <div>
+      <form method="POST" action="/planets_add">
+        <legend>Add Planet</legend>
+        <label for="POST-name">Planet Name: </label>
+        <input id="POST-name" type="text" name="name" placeholder="Planet Name">
+        <button type="submit" formmethod="POST" formaction="/planets_add">Add</button>
+      </form>
+    </div>
+
+    <!-- Conditionally display planet edit form  -->
+    <% if @orig_planet_id %>
+      <div>
+        <form method="POST" /action="/planets_edit">
+          <legend>Edit Planet</legend>
+          <input id="EDIT-id" type="hidden" name="upd_planet_id" value="<%= @orig_planet_id %>">
+          <label for="EDIT-name">Planet Name: </label>
+          <input id="EDIT-name" type="text" name="upd_planet_name" value="<%= @orig_planet_name %>" placeholder="<%= @orig_planet_name %>">
+          <button type="submit" formmethod="POST" formaction="/planets_edit">Update</button>
+        </form>
+      </div>
+    <% end %>
+
+  </body>
+
+</html>

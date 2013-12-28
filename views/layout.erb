@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- SGML Comment
+ Filename: views/layout.erb
+ Directory: /Users/abruzzim/Documents/ga_wdi/projects/planets
+ Version: 0.0-1
+ Author: Mario Abruzzi
+ Date: Thu Dec 26 16:23:41 EST 2013
+ Desc: 
+ Notes: 
+-->
+
+<html>
+
+  <head>
+    <title></title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <!-- Google Font -->
+    <link
+          href="http://fonts.googleapis.com/css?family=Limelight"
+          rel="stylesheet"
+          type="text/css"
+    >
+  </head>
+
+  <body>
+
+    <p>%DEBUG-I-LAYOUT_RB, In views/layout.erb</p><br />
+    <div class="layout_body_container">
+      <h1>Astronaut Voyages</h1>
+        <p></p><br />
+        <div>
+          <nav class="format">
+            <a href="/">Home</a>
+            <a href="/astronauts">Astronauts</a>
+            <a href="/planets">Planets</a>
+            <a href="/moons">Moons</a>
+          </nav>
+        </div>
+    </div>
+
+    <!-- Call Sinatra Handler -->
+    <%= yield %>
+
+  </body>
+
+</html>
+

@@ -1,0 +1,65 @@
+/*
+ Filename: public/style.css
+ Directory: /Users/abruzzim/Documents/ga_wdi/projects/planets
+ Version: 0.0-3
+ Author: Mario Abruzzi
+ Date: Thu Dec 26 16:23:41 EST 2013
+*/
+
+/* Debugging Element Border */
+ * {
+  border: 1px dashed red;
+}
+
+/* Basic Body Style */
+body {
+  background-color: #abcdef;
+  background: url("http://www.jpl.nasa.gov/spaceimages/images/wallpaper/PIA17563-1920x1200.jpg");
+  /*background: url("http://www.jpl.nasa.gov/spaceimages/images/wallpaper/PIA16694-1920x1200.jpg");*/
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Basic Div Style */
+div {
+  background-color: #c2f0ff;
+  text-align: center;
+}
+/* Basic h1 Style */
+h1,h2,h3,h4,h5,h6 {
+  background-color: #0066cc;
+  font-family: cursive;
+  color: #ffffff;
+  text-align: center;
+}
+/* Basic Paragraph Style */
+p {
+  background-color: #ffffcc;
+}
+/* Basic Anchor Style */
+a {
+  background-color: #e0b2f0;
+  color: #c00;
+  text-decoration: none;
+}
+
+th,td {
+  color: #ffffff;
+}
+table.format {
+  color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+ul.format {
+  color: #ffffff;
+}
+
+nav.format {
+  margin: 10px;
+  text-align: right;
+}

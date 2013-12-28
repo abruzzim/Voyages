@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- SGML
+ Filename: views/moons.erb
+ Directory: /Users/abruzzim/Documents/ga_wdi/projects/planets
+ Author: Mario Abruzzi
+ Date: Thu Dec 26 16:23:41 EST 2013
+ Desc: Week 0 - Day 0 - HW
+ Notes: 
+-->
+
+<html>
+
+  <head>
+  </head>
+
+  <body>
+
+    <p>%DEBUG-I-MOONS_RB, In views/moons.erb</p><br />
+    <h2>Moons Admin</h2><br />
+
+    <!-- Create a Table that displays all moons -->
+    <h3>Table Listing</h3>
+    <table class="format">
+      <!-- Table Header -->
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <!-- Table Body -->
+      <tbody>
+        <% @moon_list.each do |moon| %>
+        <tr>
+          <!-- Column 1 -->
+          <td>
+            <a href=""><%= moon.name %></a>
+          </td>
+          <!-- Column 2 -->
+          <td>
+            <form method="GET" action="/moons_edit">
+              <button type="submit" name="moon_id" value="<%= moon.id %>">Edit</button>
+            </form>
+          </td>
+          <!-- Column 3 -->
+          <td>
+            <form method="POST" action="/moons_del">
+              <button type="submit" name="moon_id" value="<%= moon.id %>">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <!-- Create add moon option -->
+    <h3>Add Moon</h3>
+    <!--div-->
+      <form method="POST" action="/moons_add">
+        <fieldset>
+          <legend><span>Add Moon</span></legend>
+          <label for="POST-moon-name">Name: </label>
+          <input id="POST-moon-name" type="text" name="name" placeholder="Moon Name">
+          <!-- Select a planet associated with this moon. -->
+          <label>Associated Planet: </label>
+          <select name="planet_id">
+            <option value="">- Planet Name -</option>
+            <% @planet_list.each do |planet| %>
+            <option value="<%= planet.id %>"><%= planet.name %></option>
+            <% end %>
+          </select>
+          <!-- Submit the form data to the controller. -->
+          <button type="submit" formmethod="POST" formaction="/moons_add">Add</button>
+        </fieldset>
+      </form>
+    <!--/div-->
+
+    <!-- Conditionally display moon edit form  -->
+    <% if @orig_moon_id %>
+      <!--div-->
+        <form method="POST" /action="/moons_edit">
+          <fieldset>
+            <legend><span>Edit Moon</span></legend>
+            <!-- Get user input. -->
+            <input id="EDIT-moon-id" type="hidden" name="upd_moon_id" value="<%= @orig_moon_id %>">
+            <label for="EDIT-moon-name">Name: </label>
+            <input id="EDIT-moon-name" type="text" name="upd_moon_name" value="<%= @orig_moon_name %>" placeholder="<%= @orig_moon_name %>">
+            <!-- Update a planet associated with this moon. -->
+            <label>Associated Planet: </label>
+            <select name="upd_planet_id">
+              <!-- Create a default option if the moon has an associated planet. -->
+              <% if @orig_planet_id %>
+                <option value="<%= @orig_planet_id %>"><%= @orig_planet_name %></option>
+              <% else %>
+                <option value="">- Planet Name -</option>
+              <% end %>
+              <!-- Generate a list of planets. -->
+              <% @planet_list.each do |planet| %>
+              <option value="<%= planet.id %>"><%= planet.name %></option>
+              <% end %>
+            </select>
+            <!-- Submit the form data to the controller. -->
+            <button type="submit" formmethod="POST" formaction="/moons_edit">Update</button>
+          </fieldset>
+        </form>
+      <!--/div-->
+    <% end %>
+
+  </body>
+
+</html>
