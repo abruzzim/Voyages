@@ -42,7 +42,7 @@ require_relative 'models/voyage'
 
 # Configuration Settings
 
-set :dbg, 'false'
+set :dbg, 'true'
 
 # Sinatra GET Default Route
 
@@ -81,11 +81,11 @@ get '/astronauts' do
     p "  %DEBUG-I-MAINRB, GET '/astronauts' Route Params Hash Values: #{params.values}" 
   end
   # Get all ActiveRecord::Relation Objects.
-  @astronaut_list = Astronaut.all
+  @astronaut_list = Astronaut.all.order('lname')
   # Print a sorted list of methods on the console.
-  ##@astronaut_list.methods.sort.each do |method|
-  ##  p "  #{method}"
-  ##end
+  ## @astronaut_list.methods.sort.each do |method|
+  ##   p "  #{method}"
+  ## end
   # Call view.
   erb :astronauts
 end
@@ -107,6 +107,49 @@ post '/astronauts_add' do
   astronaut.save!
   # Get all ActiveRecord::Relation Objects.
   @astronaut_list = Astronaut.all  
+  # Return to Astronauts Page.
+  erb :astronauts
+end
+
+# Sinatra GET /astronauts_edit
+
+get '/astronauts_edit' do
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra GET /astronauts_edit Route" 
+    p "  %DEBUG-I-MAINRB, GET '/astronauts_edit' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, GET '/astronauts_edit' Route Params Hash Values: #{params.values}" 
+  end
+  # Get specific astronaut object.
+  orig_astronaut = Astronaut.find(params[:astronaut_id])
+  # Define instance variables of fields to be updated.
+  @orig_astronaut_id     = orig_astronaut.id
+  @orig_astronaut_fname  = orig_astronaut.fname
+  @orig_astronaut_lname  = orig_astronaut.lname
+  @orig_astronaut_imgsrc = orig_astronaut.imgsrc
+  # Get all ActiveRecord::Relation Objects.
+  @astronaut_list = Astronaut.all.order('lname')  
+  # Return to Astronauts Page for edit operation.
+  erb :astronauts
+end
+
+# Sinatra POST /astronauts_edit
+
+post '/astronauts_edit' do
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra POST /astronauts_edit Route" 
+    p "  %DEBUG-I-MAINRB, POST '/astronauts_edit' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, POST '/astronauts_edit' Route Params Hash Values: #{params.values}" 
+  end
+  # Get specific astronaut object.
+  upd_astronaut = Astronaut.find(params[:upd_astronaut_id])
+  # Updated object attributes.
+  upd_astronaut.fname  = params[:upd_astronaut_fname]
+  upd_astronaut.lname  = params[:upd_astronaut_lname]
+  upd_astronaut.imgsrc = params[:upd_astronaut_imgsrc]
+  # Insert row into database table.
+  upd_astronaut.save!
+  # Get all ActiveRecord::Relation Objects.
+  @astronaut_list = Astronaut.all.order('lname')  
   # Return to Astronauts Page.
   erb :astronauts
 end

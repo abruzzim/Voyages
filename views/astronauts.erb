@@ -46,7 +46,7 @@
           </td>
           <!-- Column 3 -->
           <td>
-            <form method="POST" action="/astronauts_edit">
+            <form method="GET" action="/astronauts_edit">
               <button type="submit" name="astronaut_id" value="<%= astronaut.id %>">Edit</button>
             </form>
           </td>
@@ -61,47 +61,64 @@
       </tbody>
     </table>
 
-    <!-- Create add astronaut option -->
-    <h3>Add Astronaut</h3>
-    <div>
-      <form method="POST" action="/astronauts_add">
-        <fieldset>
-          <legend><span>Add Astronaut</span></legend>
-          <label for="POST-first-name">First Name: </label>
-          <input id="POST-first-name" type="text" name="fname" placeholder="First Name">
-          <label for="POST-last-name">Last Name: </label>
-          <input id="POST-last-name" type="text" name="lname" placeholder="Last Name">
-          <label for="POST-img-src">Image URL: </label>
-          <input id="POST-img-src" type="text" name="imgsrc" placeholder="Image URL">
-          <button type="submit" formmethod="POST" formaction="/astronauts_add">Add</button>
-        </fieldset>
-      </form>
-    </div>
-
-    <!-- Create an Unordered List of all astronauts with Buttons 
-    <h3>List with Buttons</h3>
-    <ul class="format">
-      <% @astronaut_list.each do |astronaut| %>
-      <li>
-        <%= astronaut.fname %>
-        <%= astronaut.lname %>
-        <form method="POST" action="/astronauts_del">
-          <button type="submit" name="astronaut_id" value="<%= astronaut.id %>">Delete</button>
+    <% if @orig_astronaut_id %>
+      <!-- Edit astronaut form -->
+      <h3>Edit</h3>
+      <!--div-->
+        <form method="POST" action="/astronauts_edit">
+          <fieldset>
+            <legend><span>Edit Astronaut</span></legend>
+            <!-- Set astronaut ID. -->
+            <input  id="EDIT-astro-id" 
+                    type="hidden" 
+                    name="upd_astronaut_id" 
+                    value="<%= @orig_astronaut_id %>">
+            <!-- Get first name. -->
+            <label for="EDIT-astro-fname">First Name: </label>
+            <input  id="EDIT-astro-fname" 
+                    type="text" 
+                    name="upd_astronaut_fname" 
+                    value="<%= @orig_astronaut_fname %>" 
+                    placeholder="<%= @orig_astronaut_fname %>">
+            <!-- Get last name. -->
+            <label for="EDIT-astro-lname">Last Name: </label>
+            <input  id="EDIT-astro-lname" 
+                    type="text" 
+                    name="upd_astronaut_lname" 
+                    value="<%= @orig_astronaut_lname %>" 
+                    placeholder="<%= @orig_astronaut_lname %>">
+            <!-- Get image URL. -->
+            <label for="EDIT-astro-imgsrc">Image URL: </label>
+            <input  id="EDIT-astro-imgsrc" 
+                    type="text" 
+                    name="upd_astronaut_imgsrc" 
+                    value="<%= @orig_astronaut_imgsrc %>" 
+                    placeholder="<%= @orig_astronaut_imgsrc %>">
+            <!-- Submit form data to controller. -->
+            <button type="submit" formmethod="POST" formaction="/astronauts_edit">Update</button>
+            <button type="button"><a href="/" style="text-decoration: none;">Cancel</a></button>
+          </fieldset>
         </form>
-      </li>
-      <% end %>
-    </ul>
-    -->
-
-    <!-- Create a Dropdown List of all astronauts -->
-    <h3>Dropdown List</h3>
-    <select>
-      <% @astronaut_list.each do |astronaut| %>
-      <option value="<%= astronaut.id %>"><%= astronaut.fname %> <%= astronaut.lname %></option>
-      <% end %>
-    </select>
+      <!--/div-->
+    <% else %>
+      <!-- Add astronaut form -->
+      <h3>Add</h3>
+      <!--div-->
+        <form method="POST" action="/astronauts_add">
+          <fieldset>
+            <legend><span>Add Astronaut</span></legend>
+            <label for="ADD-first-name">First Name: </label>
+            <input id="ADD-first-name" type="text" name="fname" placeholder="First Name">
+            <label for="ADD-last-name">Last Name: </label>
+            <input id="ADD-last-name" type="text" name="lname" placeholder="Last Name">
+            <label for="ADD-img-src">Image URL: </label>
+            <input id="ADD-img-src" type="text" name="imgsrc" placeholder="Image URL">
+            <button type="submit" formmethod="POST" formaction="/astronauts_add">Add</button>
+          </fieldset>
+        </form>
+      <!--/div-->
+    <% end %>
 
   </body>
 
 </html>
-
