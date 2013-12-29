@@ -19,15 +19,11 @@
     <h2>Astronauts Admin</h2><br />
 
     <!-- Create a Table that displays all Astronauts -->
-    <h3>Table Listing</h3>
     <table class="format">
       <!-- Table Header -->
       <thead>
         <tr>
-          <th>Name</th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th colspan="4">Astronaut List</th>
         </tr>
       </thead>
       <!-- Table Body -->
@@ -96,7 +92,7 @@
                     placeholder="<%= @orig_astronaut_imgsrc %>">
             <!-- Submit form data to controller. -->
             <button type="submit" formmethod="POST" formaction="/astronauts_edit">Update</button>
-            <button type="button"><a href="/" style="text-decoration: none;">Cancel</a></button>
+            <button type="button"><a href="/astronauts" style="text-decoration: none;">Cancel</a></button>
           </fieldset>
         </form>
       <!--/div-->

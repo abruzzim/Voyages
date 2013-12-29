@@ -19,14 +19,11 @@
     <h2>Planets Admin</h2><br />
 
     <!-- Create a Table that displays all planets -->
-    <h3>Table Listing</h3>
     <table class="format">
       <!-- Table Header -->
       <thead>
         <tr>
-          <th>Name</th>
-          <th></th>
-          <th></th>
+          <th colspan="3">Name</th>
         </tr>
       </thead>
       <!-- Table Body -->
@@ -54,28 +51,35 @@
       </tbody>
     </table>
 
-    <!-- Create add planet option -->
-    <h3>Add Planet</h3>
-    <div>
-      <form method="POST" action="/planets_add">
-        <legend>Add Planet</legend>
-        <label for="POST-name">Planet Name: </label>
-        <input id="POST-name" type="text" name="name" placeholder="Planet Name">
-        <button type="submit" formmethod="POST" formaction="/planets_add">Add</button>
-      </form>
-    </div>
-
-    <!-- Conditionally display planet edit form  -->
+    <!-- Planet Forms  -->
     <% if @orig_planet_id %>
-      <div>
+      <!-- Edit Planet Form -->
+      <h3>Edit</h3>
+      <!--div-->
         <form method="POST" /action="/planets_edit">
-          <legend>Edit Planet</legend>
-          <input id="EDIT-id" type="hidden" name="upd_planet_id" value="<%= @orig_planet_id %>">
-          <label for="EDIT-name">Planet Name: </label>
-          <input id="EDIT-name" type="text" name="upd_planet_name" value="<%= @orig_planet_name %>" placeholder="<%= @orig_planet_name %>">
-          <button type="submit" formmethod="POST" formaction="/planets_edit">Update</button>
+          <fieldset>
+            <legend><span>Edit Planet</span></legend>
+            <input id="EDIT-id" type="hidden" name="upd_planet_id" value="<%= @orig_planet_id %>">
+            <label for="EDIT-name">Planet Name: </label>
+            <input id="EDIT-name" type="text" name="upd_planet_name" value="<%= @orig_planet_name %>" placeholder="<%= @orig_planet_name %>">
+            <button type="submit" formmethod="POST" formaction="/planets_edit">Update</button>
+            <button type="button"><a href="/planets" style="text-decoration: none;">Cancel</a></button>
+          </fieldset>
         </form>
-      </div>
+      <!--/div-->
+    <% else %>
+      <!-- Add Planet Form -->
+      <h3>Add</h3>
+      <!--div-->
+        <form method="POST" action="/planets_add">
+          <fieldset>
+          <legend>Add Planet</legend>
+          <label for="ADD-name">Planet Name: </label>
+          <input id="ADD-name" type="text" name="name" placeholder="Planet Name">
+          <button type="submit" formmethod="POST" formaction="/planets_add">Add</button>
+          </fieldset>
+        </form>
+      <!--/div-->
     <% end %>
 
   </body>
