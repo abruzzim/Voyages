@@ -54,30 +54,10 @@
       </tbody>
     </table>
 
-    <!-- Create add moon option -->
-    <h3>Add Moon</h3>
-    <!--div-->
-      <form method="POST" action="/moons_add">
-        <fieldset>
-          <legend><span>Add Moon</span></legend>
-          <label for="POST-moon-name">Name: </label>
-          <input id="POST-moon-name" type="text" name="name" placeholder="Moon Name">
-          <!-- Select a planet associated with this moon. -->
-          <label>Associated Planet: </label>
-          <select name="planet_id">
-            <option value="">- Planet Name -</option>
-            <% @planet_list.each do |planet| %>
-            <option value="<%= planet.id %>"><%= planet.name %></option>
-            <% end %>
-          </select>
-          <!-- Submit the form data to the controller. -->
-          <button type="submit" formmethod="POST" formaction="/moons_add">Add</button>
-        </fieldset>
-      </form>
-    <!--/div-->
-
-    <!-- Conditionally display moon edit form  -->
+    <!-- Moon Forms  -->
     <% if @orig_moon_id %>
+      <!-- Edit Moon Form -->
+      <h3>Edit</h3>
       <!--div-->
         <form method="POST" /action="/moons_edit">
           <fieldset>
@@ -102,6 +82,28 @@
             </select>
             <!-- Submit the form data to the controller. -->
             <button type="submit" formmethod="POST" formaction="/moons_edit">Update</button>
+          </fieldset>
+        </form>
+      <!--/div-->
+    <% else %>
+      <!-- Add Moon Form -->
+      <h3>Add</h3>
+      <!--div-->
+        <form method="POST" action="/moons_add">
+          <fieldset>
+            <legend><span>Add Moon</span></legend>
+            <label for="ADD-moon-name">Name: </label>
+            <input id="ADD-moon-name" type="text" name="name" placeholder="Moon Name">
+            <!-- Select a planet associated with this moon. -->
+            <label>Associated Planet: </label>
+            <select name="planet_id">
+              <option value="">- Planet Name -</option>
+              <% @planet_list.each do |planet| %>
+              <option value="<%= planet.id %>"><%= planet.name %></option>
+              <% end %>
+            </select>
+            <!-- Submit the form data to the controller. -->
+            <button type="submit" formmethod="POST" formaction="/moons_add">Add</button>
           </fieldset>
         </form>
       <!--/div-->
