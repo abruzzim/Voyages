@@ -68,8 +68,71 @@ get '/' do
     # Add hash to array.
     @voyage_list << trip
   end
+  # Get all ActiveRecord::Relation Objects.
+  @astronaut_list = Astronaut.all.order('lname')
   # Call view.
   erb :index
+end
+
+# Sinatra GET /voyages_add_1 Route
+
+get '/voyages_add_1' do
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra GET /voyages_add_1 Route" 
+    p "  %DEBUG-I-MAINRB, GET '/voyages_add_1' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, GET '/voyages_add_1' Route Params Hash Values: #{params.values}" 
+  end
+  # Get all Table Rows or ActiveRecord::Relation Objects.
+  @astronaut_list = Astronaut.all.order('lname')
+  @planet_list    = Planet.all.order('name')
+  # Call view - Display astronaut and planet choices.
+  erb :voyages_1
+end
+
+# Sinatra GET /voyages_add_2 Route
+
+get '/voyages_add_2' do
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra GET /voyages_add_2 Route" 
+    p "  %DEBUG-I-MAINRB, GET '/voyages_add_2' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, GET '/voyages_add_2' Route Params Hash Values: #{params.values}" 
+  end
+  # Get specific astronaut object.
+  astronaut       = Astronaut.find(params[:astronaut_id])
+  @astronaut_id   = astronaut.id
+  @astronaut_name = "#{astronaut.fname} #{astronaut.lname}"
+  # Get specific planet object.
+  planet          = Planet.find(params[:planet_id])
+  @planet_id      = planet.id
+  @planet_name    = planet.name
+  # Get all Table Rows for the selcted Planet.
+  @moon_list      = Moon.where(planet_id: planet.id)
+  p @astronaut_id
+  p @astronaut_name
+  p @planet_id
+  p @planet_name
+  p @moon_list
+  # Call view - Display moon choices.
+  erb :voyages_2
+end
+
+# Sinatra POST /voyages_add Route (incomplete)
+
+post '/voyages_add' do
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra POST /voyages_add Route" 
+    p "  %DEBUG-I-MAINRB, POST '/voyages_add' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, POST '/voyages_add' Route Params Hash Values: #{params.values}" 
+  end
+  # Build object constructor.
+  v = Voyage.new
+  v.astronaut_id = params[:astronaut_id]
+  v.planet_id    = params[:planet_id]
+  v.moon_id      = params[:moon_id]
+  # Insert object into database table.
+  v.save!
+  # Return to Main Page.
+  redirect '/'
 end
 
 # Sinatra GET /astronauts Route
@@ -106,7 +169,7 @@ post '/astronauts_add' do
   # Insert object into database table.
   astronaut.save!
   # Get all ActiveRecord::Relation Objects.
-  @astronaut_list = Astronaut.all  
+  @astronaut_list = Astronaut.all.order('lname')
   # Return to Astronauts Page.
   erb :astronauts
 end
@@ -165,7 +228,7 @@ post '/astronauts_del' do
   # Build object destructor.
   Astronaut.delete(params[:astronaut_id])
   # Get all ActiveRecord::Relation Objects.
-  @astronaut_list = Astronaut.all  
+  @astronaut_list = Astronaut.all.order('lname')
   # Return to Astronauts Page.
   erb :astronauts
 end

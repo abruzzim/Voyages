@@ -1,7 +1,7 @@
 /*
  Filename: public/style.css
  Directory: /Users/abruzzim/Documents/ga_wdi/projects/planets
- Version: 0.0-3
+ Version: 0.0-4
  Author: Mario Abruzzi
  Date: Thu Dec 26 16:23:41 EST 2013
 */
@@ -46,10 +46,10 @@ a {
 }
 
 th,td {
-  color: #ffffff;
+  color: #000000;
 }
 table.format {
-  color: #ffffff;
+  color: #000000;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -62,4 +62,12 @@ ul.format {
 nav.format {
   margin: 10px;
   text-align: right;
+}
+
+html body form fieldset legend span {
+  color: #ffffff;
+}
+
+html body form fieldset label {
+  color: #ffffff;
 }

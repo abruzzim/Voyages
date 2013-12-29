@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- SGML
+ Filename: views/voyages_1.erb
+ Directory: /Users/abruzzim/Documents/ga_wdi/projects/planets
+ Author: Mario Abruzzi
+ Date: Thu Dec 26 16:23:41 EST 2013
+ Desc: Week 0 - Day 0 - HW
+ Notes: 
+-->
+
+<html>
+
+  <head>
+  </head>
+
+  <body>
+
+    <p>%DEBUG-I-VOYAGES_1_RB, In views/voyages_1.erb</p><br />
+
+    <!-- Create new voyages (Phase 1). -->
+    <form method="GET" action="/voyages_add_2">
+      <fieldset>
+        <legend><span>Add Voyage</span></legend>
+        <!-- Select Astronaut -->
+        <label>Astronaut: </label>
+        <select name="astronaut_id">
+          <option value="">- Astronaut -</option>
+          <% @astronaut_list.each do |astronaut| %>
+          <option value="<%= astronaut.id %>"><%= astronaut.fname %> <%= astronaut.lname %></option>
+          <% end %>
+        </select>
+        <!-- Select Planet -->
+        <label>Planet: </label>
+        <select name="planet_id">
+          <option value="">- Planet -</option>
+          <% @planet_list.each do |planet| %>
+          <option value="<%= planet.id %>"><%= planet.name %></option>
+          <% end %>
+        </select>
+        <!-- Submit the form data to the controller. -->
+        <button type="submit" formmethod="GET" formaction="/voyages_add_2">Continue</button>
+      </fieldset>
+    </form>
+
+  </body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- SGML
+ Filename: views/voyages_2.erb
+ Directory: /Users/abruzzim/Documents/ga_wdi/projects/planets
+ Author: Mario Abruzzi
+ Date: Thu Dec 26 16:23:41 EST 2013
+ Desc: Week 0 - Day 0 - HW
+ Notes: 
+-->
+
+<html>
+
+  <head>
+  </head>
+
+  <body>
+
+    <p>%DEBUG-I-VOYAGES_2_RB, In views/voyages_2.erb</p><br />
+    <p>
+      <%= @astronaut_id %><br />
+      <%= @astronaut_name %><br />
+      <%= @planet_id %><br />
+      <%= @planet_name %><br />
+    </p>
+
+    <!-- Create new voyages (Phase 2). -->
+    <form method="POST" action="/voyages_add">
+      <fieldset>
+        <legend><span>Add Voyage</span></legend>
+
+        <!-- Display Selected Astronaut -->
+        <label for="ADD-astronaut">Astronaut: </label>
+        <input id="ADD-astronaut" type="text" name="astronaut_id" value="<%= @astronaut_id %>" placeholder="<%= @astronaut_name %>">
+
+        <!-- Display Selected Planet -->
+        <label for="ADD-planet">Planet: </label>
+        <input id="ADD-planet" type="text" name="planet_id" value="<%= @planet_id %>" placeholder="<%= @planet_name %>">
+
+        <!-- Select Moon -->
+        <label>Moon: </label>
+        <select name="moon_id">
+          <option value="">- Moon -</option>
+          <% @moon_list.each do |moon| %>
+          <option value="<%= moon.id %>"><%= moon.name %></option>
+          <% end %>
+        </select>
+        <!-- Submit the form data to the controller. -->
+        <button type="submit" formmethod="POST" formaction="/voyages_add">Add</button>
+      </fieldset>
+    </form>
+
+  </body>
+
+</html>
