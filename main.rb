@@ -40,12 +40,18 @@ require_relative 'models/voyage'
 ##require_relative 'specs/'
 ##require_relative 'views/'
 
+# Configuration Settings
+
+set :dbg, 'false'
+
 # Sinatra GET Default Route
 
 get '/' do
-  p "  %DEBUG-I-MAINRB, In Sinatra GET Default (/) Route" 
-  p "  %DEBUG-I-MAINRB, GET '/' Route Params Hash Keys: #{params.keys}"
-  p "  %DEBUG-I-MAINRB, GET '/' Route Params Hash Values: #{params.values}"
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra GET Default (/) Route" 
+    p "  %DEBUG-I-MAINRB, GET '/' Route Params Hash Keys: #{params.keys}"
+    p "  %DEBUG-I-MAINRB, GET '/' Route Params Hash Values: #{params.values}"
+  end
   # Initialize array.
   @voyage_list = []
   # Get ActiveRecord::Relation Object.
@@ -69,9 +75,11 @@ end
 # Sinatra GET /astronauts Route
 
 get '/astronauts' do
-  p "  %DEBUG-I-MAINRB, In Sinatra GET /astronauts Route" 
-  p "  %DEBUG-I-MAINRB, GET '/astronauts' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, GET '/astronauts' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra GET /astronauts Route" 
+    p "  %DEBUG-I-MAINRB, GET '/astronauts' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, GET '/astronauts' Route Params Hash Values: #{params.values}" 
+  end
   # Get all ActiveRecord::Relation Objects.
   @astronaut_list = Astronaut.all
   # Print a sorted list of methods on the console.
@@ -85,9 +93,11 @@ end
 # Sinatra POST /astronauts_add Route
 
 post '/astronauts_add' do
-  p "  %DEBUG-I-MAINRB, In Sinatra POST /astronauts_add Route" 
-  p "  %DEBUG-I-MAINRB, POST '/astronauts_add' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, POST '/astronauts_add' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra POST /astronauts_add Route" 
+    p "  %DEBUG-I-MAINRB, POST '/astronauts_add' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, POST '/astronauts_add' Route Params Hash Values: #{params.values}" 
+  end
   # Build object constructor.
   astronaut = Astronaut.new
   astronaut.fname  = params[:fname]
@@ -104,9 +114,11 @@ end
 # Sinatra POST /astronauts_del Route
 
 post '/astronauts_del' do
-  p "  %DEBUG-I-MAINRB, In Sinatra POST /astronauts_del Route" 
-  p "  %DEBUG-I-MAINRB, POST '/astronauts_del' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, POST '/astronauts_del' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra POST /astronauts_del Route" 
+    p "  %DEBUG-I-MAINRB, POST '/astronauts_del' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, POST '/astronauts_del' Route Params Hash Values: #{params.values}" 
+  end
   # Build object destructor.
   Astronaut.delete(params[:astronaut_id])
   # Get all ActiveRecord::Relation Objects.
@@ -118,9 +130,11 @@ end
 # Sinatra GET /planets Route
 
 get '/planets' do
-  p "  %DEBUG-I-MAINRB, In Sinatra GET /planets Route" 
-  p "  %DEBUG-I-MAINRB, GET '/planets' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, GET '/planets' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra GET /planets Route" 
+    p "  %DEBUG-I-MAINRB, GET '/planets' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, GET '/planets' Route Params Hash Values: #{params.values}" 
+  end
   # Get all ActiveRecord::Relation Objects.
   @planet_list = Planet.all.order('name')
   # Call view.
@@ -130,9 +144,11 @@ end
 # Sinatra POST /planets_add Route
 
 post '/planets_add' do
-  p "  %DEBUG-I-MAINRB, In Sinatra POST /planets_add Route" 
-  p "  %DEBUG-I-MAINRB, POST '/planets_add' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, POST '/planets_add' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra POST /planets_add Route" 
+    p "  %DEBUG-I-MAINRB, POST '/planets_add' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, POST '/planets_add' Route Params Hash Values: #{params.values}" 
+  end
   # Build object constructor.
   planet = Planet.new
   planet.name  = params[:name]
@@ -147,9 +163,11 @@ end
 # Sinatra GET /planets_edit
 
 get '/planets_edit' do
-  p "  %DEBUG-I-MAINRB, In Sinatra GET /planets_edit Route" 
-  p "  %DEBUG-I-MAINRB, GET '/planets_edit' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, GET '/planets_edit' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra GET /planets_edit Route" 
+    p "  %DEBUG-I-MAINRB, GET '/planets_edit' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, GET '/planets_edit' Route Params Hash Values: #{params.values}" 
+  end
   # Get specific planet object.
   orig_planet = Planet.find(params[:planet_id])
   # Define instance variables.
@@ -164,9 +182,11 @@ end
 # Sinatra POST /planets_edit
 
 post '/planets_edit' do
-  p "  %DEBUG-I-MAINRB, In Sinatra POST /planets_edit Route" 
-  p "  %DEBUG-I-MAINRB, POST '/planets_edit' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, POST '/planets_edit' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra POST /planets_edit Route" 
+    p "  %DEBUG-I-MAINRB, POST '/planets_edit' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, POST '/planets_edit' Route Params Hash Values: #{params.values}" 
+  end
   # Get specific planet object.
   upd_planet = Planet.find(params[:upd_planet_id])
   # Update object attribute.
@@ -182,9 +202,11 @@ end
 # Sinatra POST /planets_del Route
 
 post '/planets_del' do
-  p "  %DEBUG-I-MAINRB, In Sinatra POST /planets_del Route" 
-  p "  %DEBUG-I-MAINRB, POST '/planets_del' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, POST '/planets_del' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra POST /planets_del Route" 
+    p "  %DEBUG-I-MAINRB, POST '/planets_del' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, POST '/planets_del' Route Params Hash Values: #{params.values}" 
+  end
   # Build object destructor.
   Planet.delete(params[:planet_id])
   # Get all ActiveRecord::Relation Objects.
@@ -196,9 +218,11 @@ end
 # Sinatra GET /moons Route
 
 get '/moons' do
-  p "  %DEBUG-I-MAINRB, In Sinatra GET /moons Route" 
-  p "  %DEBUG-I-MAINRB, GET '/moons' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, GET '/moons' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra GET /moons Route" 
+    p "  %DEBUG-I-MAINRB, GET '/moons' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, GET '/moons' Route Params Hash Values: #{params.values}" 
+  end
   # Get all ActiveRecord::Relation Objects.
   @planet_list = Planet.all.order('name')
   # Get all ActiveRecord::Relation Objects.
@@ -210,9 +234,11 @@ end
 # Sinatra POST /moons_add Route
 
 post '/moons_add' do
-  p "  %DEBUG-I-MAINRB, In Sinatra POST /moons_add Route" 
-  p "  %DEBUG-I-MAINRB, POST '/moons_add' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, POST '/moons_add' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra POST /moons_add Route" 
+    p "  %DEBUG-I-MAINRB, POST '/moons_add' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, POST '/moons_add' Route Params Hash Values: #{params.values}" 
+  end
   # Build object constructor.
   moon           = Moon.new
   moon.name      = params[:name]
@@ -230,9 +256,11 @@ end
 # Sinatra GET /moons_edit
 
 get '/moons_edit' do
-  p "  %DEBUG-I-MAINRB, In Sinatra GET /moons_edit Route" 
-  p "  %DEBUG-I-MAINRB, GET '/moons_edit' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, GET '/moons_edit' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra GET /moons_edit Route" 
+    p "  %DEBUG-I-MAINRB, GET '/moons_edit' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, GET '/moons_edit' Route Params Hash Values: #{params.values}" 
+  end
   # Get specific moon object.
   orig_moon = Moon.find(params[:moon_id])
   # Define instance variables.
@@ -255,9 +283,11 @@ end
 # Sinatra POST /moons_edit
 
 post '/moons_edit' do
-  p "  %DEBUG-I-MAINRB, In Sinatra POST /moons_edit Route" 
-  p "  %DEBUG-I-MAINRB, POST '/moons_edit' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, POST '/moons_edit' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra POST /moons_edit Route" 
+    p "  %DEBUG-I-MAINRB, POST '/moons_edit' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, POST '/moons_edit' Route Params Hash Values: #{params.values}" 
+  end
   # Get specific moon object.
   upd_moon = Moon.find(params[:upd_moon_id])
   # Update object attributes.
@@ -276,9 +306,11 @@ end
 # Sinatra POST /moons_del Route
 
 post '/moons_del' do
-  p "  %DEBUG-I-MAINRB, In Sinatra POST /moons_del Route" 
-  p "  %DEBUG-I-MAINRB, POST '/moons_del' Route Params Hash Keys: #{params.keys}" 
-  p "  %DEBUG-I-MAINRB, POST '/moons_del' Route Params Hash Values: #{params.values}" 
+  if settings.dbg == 'true'
+    p "  %DEBUG-I-MAINRB, In Sinatra POST /moons_del Route" 
+    p "  %DEBUG-I-MAINRB, POST '/moons_del' Route Params Hash Keys: #{params.keys}" 
+    p "  %DEBUG-I-MAINRB, POST '/moons_del' Route Params Hash Values: #{params.values}" 
+  end
   # Build object destructor.
   Moon.delete(params[:moon_id])
   # Get all ActiveRecord::Relation Objects.
